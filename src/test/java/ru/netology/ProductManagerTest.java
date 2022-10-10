@@ -86,20 +86,24 @@ class ProductManagerTest {
     }
 
     @Test
-    void positiveMatches() {
-        Product product = new Smartphone("one", "Manufacturer", 10L);
-        boolean expected = true;
-        boolean actual = manager.matches(product, "ne");
+    void matches() {
+        manager.add(new Book("one", "Athor", 10L));
+        manager.add(new Smartphone("two", "Manufacturer", 10L));
+        manager.add(new Smartphone("three", "Manfactrer", 10L));
+        manager.add(new Product("four",10L));
+        manager.add(new Book("five", "Author", 10L));
+        manager.add(new Smartphone("usix", "Manfactrer", 10L));
+        manager.add(new Book("useven", "Athor", 10L));
+        manager.add(new Product("eight",10L));
 
-        assertEquals(expected, actual);
-    }
+        Product[] expected = new Product[]{
+                new Smartphone("two", "Manufacturer", 10L),
+                new Product("four",10L),
+                new Book("five", "Author", 10L),
+                new Smartphone("usix", "Manfactrer", 10L),
+                new Book("useven", "Athor", 10L)};
+        Product[] actual = manager.searchBy("u");
 
-    @Test
-    void negativeMatches() {
-        Product product = new Smartphone("one", "Manufacturer", 10L);
-        boolean expected = false;
-        boolean actual = manager.matches(product, "oe");
-
-        assertEquals(expected, actual);
+        assertArrayEquals(expected, actual);
     }
 }

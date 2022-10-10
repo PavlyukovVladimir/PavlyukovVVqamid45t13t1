@@ -45,4 +45,8 @@ public class Product {
     public int hashCode() {
         return Objects.hash(getName(), getCost());
     }
+
+    public boolean matches(String search) {
+        return getName().contains(search);
+    }
 }

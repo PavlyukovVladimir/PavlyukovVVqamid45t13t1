@@ -29,4 +29,9 @@ public class Book extends Product {
     public int hashCode() {
         return Objects.hash(super.hashCode(), getAuthor());
     }
+
+    @Override
+    public boolean matches(String search) {
+        return super.matches(search) || getAuthor().contains(search);
+    }
 }
